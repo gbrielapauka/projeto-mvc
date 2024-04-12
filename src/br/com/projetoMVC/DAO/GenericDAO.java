@@ -1,7 +1,7 @@
 package br.com.projetoMVC.DAO;
 
 import java.util.List;
-
+ 
 public interface GenericDAO {
 	
 	public List<Object> listarTodos();
