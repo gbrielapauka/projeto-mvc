@@ -57,8 +57,32 @@ public class ProdutoDAOImpl implements GenericDAO{
 
 	@Override
 	public Object listarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Produto produto = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM produto HERE id = ?";
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				produto = new Produto();
+				produto.setId(rs.getInt("id"));
+				produto.setDesricao(rs.getString("descricao"));
+			}
+		} catch (SQLException e) {
+			System.out.println("Problemas na DAO ao carregar Produto! Erro: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			try {
+				ConnectionFactory.closeConnection(conn,stmt,rs);
+			} catch (Exception ex) {
+				System.out.println("Problemas ao fechar conexão! Erro " + ex.getMessage());
+			}
+		}
+		return produto;
 	}
 
 	@Override

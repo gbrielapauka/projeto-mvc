@@ -1,5 +1,8 @@
 package br.com.projetoMVC;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import br.com.projetoMVC.controller.ProdutoController;
 import br.com.projetoMVC.model.Produto;
+import br.com.projetoMVC.util.ConnectionFactory;
 
 public class Main {
 
@@ -56,7 +60,7 @@ public class Main {
 				break;
 				
 			case 2:
-				JOptionPane.showMessageDialog(null, "Listar por ID");
+				
 				break;
 				
 			case 3:
