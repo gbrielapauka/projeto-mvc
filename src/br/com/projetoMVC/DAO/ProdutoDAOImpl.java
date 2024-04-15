@@ -63,8 +63,27 @@ public class ProdutoDAOImpl implements GenericDAO{
 
 	@Override
 	public Boolean cadastrar(Object object) {
-		// TODO Auto-generated method stub
-		return null;
+		Produto produto = (Produto) object;
+		PreparedStatement stmt = null;
+		String sql = "INSERT INTO produto (descricao) " + "VALUES (?)";
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, produto.getDesricao());
+			stmt.execute();
+			return true;
+		} catch (Exception e) {
+			System.out.println("Problemas na DAO ao cadastrar Produto! Erro: " + e.getMessage());
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				ConnectionFactory.closeConnection(conn, stmt);
+			} catch (Exception ex) {
+				System.out.println("Problemas ao fechar conexão! Erro: " + ex.getMessage());
+				ex.printStackTrace();
+			}
+		}
 	}
 
 	@Override
